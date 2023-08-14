@@ -130,10 +130,15 @@ export class GroupLayer extends RetrieverLayer {
    * @param groupName Group name
    * @param contacts Contacts that should be added.
    */
-  public async createGroup(groupName: string, contacts: string | string[]) {
+  public async createGroup(
+    groupName: string,
+    contacts: string | string[],
+    parentGroup: string
+  ) {
     return await evaluateAndReturn(
       this.page,
-      ({ groupName, contacts }) => WPP.group.create(groupName, contacts),
+      ({ groupName, contacts }) =>
+        WPP.group.create(groupName, contacts, parentGroup),
       { groupName, contacts }
     );
   }

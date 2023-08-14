@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿# Update checking
 
 Whatsapp is in constant change, in order to tackle this issue I suggest keeping your Wppconnect package always up-to-date.
 
 The method/function names won't change, only their core algorithm. This way you won't have to makes changes in your code at every update. They will remain the same forever.
+=======
+﻿
+>>>>>>> 69cc93f7087607b94986b8799340a94b36fd9f81

@@ -20,10 +20,10 @@ exports.defaultOptions = {
     waitForLogin: true,
     logger: logger_1.defaultLogger,
     tokenStore: 'file',
-    whatsappVersion: '2.2307.x',
+    whatsappVersion: '2.2331.x',
     deviceName: false,
     linkPreviewApiServers: null,
     disableGoogleAnalytics: true,
     googleAnalyticsId: null,
-    poweredBy: 'WPPConnect',
+    poweredBy: '',
 };

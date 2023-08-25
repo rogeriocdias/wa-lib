@@ -76,7 +76,7 @@ export declare class GroupLayer extends RetrieverLayer {
      * @param groupName Group name
      * @param contacts Contacts that should be added.
      */
-    createGroup(groupName: string, contacts: string | string[], parentGroup: string): Promise<{
+    createGroup(groupName: string, contacts: string | string[]): Promise<{
         gid: import("@wppconnect/wa-js/dist/whatsapp").Wid;
         participants: {
             [key: `${number}@c.us`]: {

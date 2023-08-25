@@ -190,13 +190,13 @@ var GroupLayer = /** @class */ (function (_super) {
      * @param groupName Group name
      * @param contacts Contacts that should be added.
      */
-    GroupLayer.prototype.createGroup = function (groupName, contacts, parentGroup) {
+    GroupLayer.prototype.createGroup = function (groupName, contacts) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, (0, helpers_1.evaluateAndReturn)(this.page, function (_a) {
                             var groupName = _a.groupName, contacts = _a.contacts;
-                            return WPP.group.create(groupName, contacts, parentGroup);
+                            return WPP.group.create(groupName, contacts, null);
                         }, { groupName: groupName, contacts: contacts })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }

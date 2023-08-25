@@ -39,9 +39,9 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async leaveGroup(groupId: string) {
     return evaluateAndReturn(
-      this.page,
-      (groupId) => WPP.group.leave(groupId),
-      groupId
+        this.page,
+        (groupId) => WPP.group.leave(groupId),
+        groupId
     );
   }
 
@@ -52,12 +52,12 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async getGroupMembersIds(groupId: string): Promise<Id[]> {
     return evaluateAndReturn(
-      this.page,
-      (groupId: string) =>
-        Promise.resolve(WPP.group.getParticipants(groupId)).then(
-          (participants) => participants.map((p) => p.id as any)
-        ),
-      groupId
+        this.page,
+        (groupId: string) =>
+            Promise.resolve(WPP.group.getParticipants(groupId)).then(
+                (participants) => participants.map((p) => p.id as any)
+            ),
+        groupId
     );
   }
 
@@ -82,9 +82,9 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async getGroupInviteLink(chatId: string) {
     const code = await evaluateAndReturn(
-      this.page,
-      (chatId) => WPP.group.getInviteCode(chatId),
-      chatId
+        this.page,
+        (chatId) => WPP.group.getInviteCode(chatId),
+        chatId
     );
 
     return `https://chat.whatsapp.com/${code}`;
@@ -98,9 +98,9 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async revokeGroupInviteLink(chatId: string) {
     const code = await evaluateAndReturn(
-      this.page,
-      (chatId) => WPP.group.revokeInviteCode(chatId),
-      chatId
+        this.page,
+        (chatId) => WPP.group.revokeInviteCode(chatId),
+        chatId
     );
 
     return `https://chat.whatsapp.com/${code}`;
@@ -118,9 +118,9 @@ export class GroupLayer extends RetrieverLayer {
     inviteCode = inviteCode.replace('https://', '');
     inviteCode = inviteCode.replace('http://', '');
     return await evaluateAndReturn(
-      this.page,
-      (inviteCode) => WPP.group.getGroupInfoFromInviteCode(inviteCode),
-      inviteCode
+        this.page,
+        (inviteCode) => WPP.group.getGroupInfoFromInviteCode(inviteCode),
+        inviteCode
     );
   }
 
@@ -130,16 +130,11 @@ export class GroupLayer extends RetrieverLayer {
    * @param groupName Group name
    * @param contacts Contacts that should be added.
    */
-  public async createGroup(
-    groupName: string,
-    contacts: string | string[],
-    parentGroup: string
-  ) {
+  public async createGroup(groupName: string, contacts: string | string[]) {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupName, contacts }) =>
-        WPP.group.create(groupName, contacts, parentGroup),
-      { groupName, contacts }
+        this.page,
+        ({ groupName, contacts }) => WPP.group.create(groupName, contacts, null),
+        { groupName, contacts }
     );
   }
 
@@ -150,14 +145,14 @@ export class GroupLayer extends RetrieverLayer {
    * @param participantId Participant id'000000000000@c.us'
    */
   public async removeParticipant(
-    groupId: string,
-    participantId: string | string[]
+      groupId: string,
+      participantId: string | string[]
   ) {
     await evaluateAndReturn(
-      this.page,
-      ({ groupId, participantId }) =>
-        WPP.group.removeParticipants(groupId, participantId),
-      { groupId, participantId }
+        this.page,
+        ({ groupId, participantId }) =>
+            WPP.group.removeParticipants(groupId, participantId),
+        { groupId, participantId }
     );
 
     return true;
@@ -170,14 +165,14 @@ export class GroupLayer extends RetrieverLayer {
    * @param participantId Participant id'000000000000@c.us'
    */
   public async addParticipant(
-    groupId: string,
-    participantId: string | string[]
+      groupId: string,
+      participantId: string | string[]
   ) {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, participantId }) =>
-        WPP.group.addParticipants(groupId, participantId),
-      { groupId, participantId }
+        this.page,
+        ({ groupId, participantId }) =>
+            WPP.group.addParticipants(groupId, participantId),
+        { groupId, participantId }
     );
   }
 
@@ -188,14 +183,14 @@ export class GroupLayer extends RetrieverLayer {
    * @param participantId Participant id'000000000000@c.us'
    */
   public async promoteParticipant(
-    groupId: string,
-    participantId: string | string[]
+      groupId: string,
+      participantId: string | string[]
   ) {
     await evaluateAndReturn(
-      this.page,
-      ({ groupId, participantId }) =>
-        WPP.group.promoteParticipants(groupId, participantId),
-      { groupId, participantId }
+        this.page,
+        ({ groupId, participantId }) =>
+            WPP.group.promoteParticipants(groupId, participantId),
+        { groupId, participantId }
     );
 
     return true;
@@ -208,14 +203,14 @@ export class GroupLayer extends RetrieverLayer {
    * @param participantId Participant id'000000000000@c.us'
    */
   public async demoteParticipant(
-    groupId: string,
-    participantId: string | string[]
+      groupId: string,
+      participantId: string | string[]
   ) {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, participantId }) =>
-        WPP.group.demoteParticipants(groupId, participantId),
-      { groupId, participantId }
+        this.page,
+        ({ groupId, participantId }) =>
+            WPP.group.demoteParticipants(groupId, participantId),
+        { groupId, participantId }
     );
 
     return true;
@@ -228,12 +223,12 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async getGroupAdmins(chatId: string) {
     const participants = await evaluateAndReturn(
-      this.page,
-      (chatId) =>
-        Promise.resolve(WPP.group.getParticipants(chatId)).then(
-          (participants) => participants.map((p) => p.toJSON())
-        ),
-      chatId
+        this.page,
+        (chatId) =>
+            Promise.resolve(WPP.group.getParticipants(chatId)).then(
+                (participants) => participants.map((p) => p.toJSON())
+            ),
+        chatId
     );
 
     return participants.filter((p) => p.isAdmin).map((p) => p.id);
@@ -249,9 +244,9 @@ export class GroupLayer extends RetrieverLayer {
     inviteCode = inviteCode.replace('https://', '');
     inviteCode = inviteCode.replace('http://', '');
     return await evaluateAndReturn(
-      this.page,
-      (inviteCode) => WPP.group.join(inviteCode),
-      inviteCode
+        this.page,
+        (inviteCode) => WPP.group.join(inviteCode),
+        inviteCode
     );
   }
 
@@ -264,10 +259,10 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async setGroupDescription(groupId: string, description: string) {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, description }) =>
-        WPP.group.setDescription(groupId, description),
-      { groupId, description }
+        this.page,
+        ({ groupId, description }) =>
+            WPP.group.setDescription(groupId, description),
+        { groupId, description }
     );
   }
 
@@ -280,9 +275,9 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async setGroupSubject(groupId: string, title: string) {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, title }) => WPP.group.setSubject(groupId, title),
-      { groupId, title }
+        this.page,
+        ({ groupId, title }) => WPP.group.setSubject(groupId, title),
+        { groupId, title }
     );
   }
 
@@ -295,15 +290,15 @@ export class GroupLayer extends RetrieverLayer {
    * @returns empty object
    */
   public async setGroupProperty(
-    groupId: string,
-    property: GroupProperty,
-    value: boolean
+      groupId: string,
+      property: GroupProperty,
+      value: boolean
   ) {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, property, value }) =>
-        WPP.group.setProperty(groupId, property, value),
-      { groupId, property, value }
+        this.page,
+        ({ groupId, property, value }) =>
+            WPP.group.setProperty(groupId, property, value),
+        { groupId, property, value }
     );
   }
 
@@ -346,7 +341,7 @@ export class GroupLayer extends RetrieverLayer {
 
     if (!mimeInfo || !mimeInfo.includes('image')) {
       const error = new Error(
-        'Not an image, allowed formats png, jpeg and webp'
+          'Not an image, allowed formats png, jpeg and webp'
       );
       Object.assign(error, {
         code: 'invalid_image',
@@ -355,9 +350,9 @@ export class GroupLayer extends RetrieverLayer {
     }
 
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, base64 }) => WPP.group.setIcon(groupId, base64),
-      { groupId, base64 }
+        this.page,
+        ({ groupId, base64 }) => WPP.group.setIcon(groupId, base64),
+        { groupId, base64 }
     );
   }
   /**
@@ -372,9 +367,9 @@ export class GroupLayer extends RetrieverLayer {
     }
 
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId }) => WPP.group.removeIcon(groupId),
-      { groupId }
+        this.page,
+        ({ groupId }) => WPP.group.removeIcon(groupId),
+        { groupId }
     );
   }
 
@@ -385,7 +380,7 @@ export class GroupLayer extends RetrieverLayer {
    */
   public async getGroupSizeLimit() {
     return await evaluateAndReturn(this.page, () =>
-      WPP.group.getGroupSizeLimit()
+        WPP.group.getGroupSizeLimit()
     );
   }
 
@@ -397,18 +392,18 @@ export class GroupLayer extends RetrieverLayer {
    * @returns Promise
    */
   public async approveGroupMembershipRequest(
-    groupId: string,
-    membershipIds: string | string[]
+      groupId: string,
+      membershipIds: string | string[]
   ): Promise<
-    {
-      error: any;
-      wid: Wid;
-    }[]
+      {
+        error: any;
+        wid: Wid;
+      }[]
   > {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, membershipIds }) => WPP.group.approve(groupId, membershipIds),
-      { groupId, membershipIds }
+        this.page,
+        ({ groupId, membershipIds }) => WPP.group.approve(groupId, membershipIds),
+        { groupId, membershipIds }
     );
   }
 
@@ -420,18 +415,18 @@ export class GroupLayer extends RetrieverLayer {
    * @returns Promise
    */
   public async rejectGroupMembershipRequest(
-    groupId: string,
-    membershipIds: string | string[]
+      groupId: string,
+      membershipIds: string | string[]
   ): Promise<
-    {
-      error: any;
-      wid: Wid;
-    }[]
+      {
+        error: any;
+        wid: Wid;
+      }[]
   > {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId, membershipIds }) => WPP.group.reject(groupId, membershipIds),
-      { groupId, membershipIds }
+        this.page,
+        ({ groupId, membershipIds }) => WPP.group.reject(groupId, membershipIds),
+        { groupId, membershipIds }
     );
   }
 
@@ -442,18 +437,18 @@ export class GroupLayer extends RetrieverLayer {
    * @returns Promise
    */
   public async getGroupMembershipRequests(groupId: string): Promise<
-    {
-      addedBy: Wid;
-      id: Wid;
-      parentGroupId?: Wid;
-      requestMethod: 'InviteLink' | 'LinkedGroupJoin' | 'NonAdminAdd';
-      t: number;
-    }[]
+      {
+        addedBy: Wid;
+        id: Wid;
+        parentGroupId?: Wid;
+        requestMethod: 'InviteLink' | 'LinkedGroupJoin' | 'NonAdminAdd';
+        t: number;
+      }[]
   > {
     return await evaluateAndReturn(
-      this.page,
-      ({ groupId }) => WPP.group.getMembershipRequests(groupId),
-      { groupId }
+        this.page,
+        ({ groupId }) => WPP.group.getMembershipRequests(groupId),
+        { groupId }
     );
   }
 }

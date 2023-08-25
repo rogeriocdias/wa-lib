@@ -26,13 +26,13 @@ import {
 //EvaluateFn, EvaluateFnReturnType, SerializableOrJSHandle //
 
 export async function evaluateAndReturn<T extends EvaluateFn>(
-  page: Page,
-  pageFunction: T,
-  ...args: SerializableOrJSHandle[]
+    page: Page,
+    pageFunction: T,
+    ...args: SerializableOrJSHandle[]
 ): Promise<
-  EvaluateFnReturnType<T> extends PromiseLike<infer U>
-    ? U
-    : EvaluateFnReturnType<T>
+    EvaluateFnReturnType<T> extends PromiseLike<infer U>
+        ? U
+        : EvaluateFnReturnType<T>
 > {
   // See https://github.com/puppeteer/puppeteer/blob/41f23beb0da2433cf9103e5d8fc22a03b1820336/src/common/ExecutionContext.ts#L196
 
@@ -44,7 +44,7 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
     // time prefixing 'function '.
     if (functionText.startsWith('async ')) {
       functionText =
-        'async function ' + functionText.substring('async '.length);
+          'async function ' + functionText.substring('async '.length);
     } else {
       functionText = 'function ' + functionText;
     }
@@ -125,7 +125,7 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
 
   if (result !== null && typeof result === 'object' && '__error' in result) {
     const errorMessage =
-      result.__error.message || JSON.stringify(result.__error);
+        result.__error.message || JSON.stringify(result.__error);
 
     const error = new Error(errorMessage);
 
@@ -134,7 +134,9 @@ export async function evaluateAndReturn<T extends EvaluateFn>(
     let jsStack = error.stack;
     Error.captureStackTrace(error);
     if (jsStack) {
-      error.stack = (error.stack || '') + '\nJS Stack: ' + jsStack;
+      error.stack = `${
+          error.stack || ''
+      }\nJS Stack: ${jsStack}\nFunction: ${functionText}`;
     }
 
     throw error;

@@ -18,7 +18,6 @@
 import { Whatsapp } from '../api/whatsapp';
 import { CreateConfig, defaultOptions } from '../config/create-config';
 import { initBrowser, getOrCreatePage } from './browser';
-import { checkUpdates, welcomeScreen } from './welcome';
 import { SocketState, StatusFind } from '../api/model/enum';
 import { Browser } from 'puppeteer';
 import {
@@ -116,14 +115,6 @@ export async function create(
     logger.warn(
       'You are using deprecated create method, please use create({options}) See: https://wppconnect.io/wppconnect/pages/Getting%20Started/creating-client.html#passing-options-on-create'
     );
-  }
-
-  if (!mergedOptions.disableWelcome) {
-    welcomeScreen();
-  }
-
-  if (mergedOptions.updatesLog) {
-    await checkUpdates();
   }
 
   let browser = mergedOptions.browser;

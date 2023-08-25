@@ -25,46 +25,6 @@ const { version } = require('../../package.json');
 let welcomeShown = false;
 let updatesChecked = false;
 
-export function welcomeScreen() {
-  if (welcomeShown) {
-    return;
-  }
-  welcomeShown = true;
-  logger.info(`
-  _       ______  ____  ______                            __ 
-  | |     / / __ \\/ __ \\/ ____/___  ____  ____  ___  _____/ /_
-  | | /| / / /_/ / /_/ / /   / __ \\/ __ \\/ __ \\/ _ \\/ ___/ __/
-  | |/ |/ / ____/ ____/ /___/ /_/ / / / / / / /  __/ /__/ /_  
-  |__/|__/_/   /_/    \\____/\\____/_/ /_/_/ /_/\\___/\\___/\\__/`);
-}
-
-export async function checkUpdates() {
-  // Check for updates if needed
-  if (!updatesChecked) {
-    updatesChecked = true;
-    await checkWPPConnectVersion();
-  }
-}
-
-/**
- * Checs for a new versoin of wppconnect and logs
- */
-async function checkWPPConnectVersion() {
-  logger.info('Checking for updates');
-  await latestVersion('@wppconnect-team/wppconnect')
-    .then((latest) => {
-      if (upToDate(version, latest)) {
-        logger.info("You're up to date");
-      } else {
-        logger.info('There is a new version available');
-        logUpdateAvailable(version, latest);
-      }
-    })
-    .catch(() => {
-      logger.warn('Failed to check updates');
-    });
-}
-
 /**
  * Logs a boxen of instructions to update
  * @param current

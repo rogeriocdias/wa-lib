@@ -1,5 +1,5 @@
 {
-  "name": "wa-testers",
+  "name": "wa-lib",
   "version": "1",
   "description": "",
   "main": "dist/index.js",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rogeriocdias/wa-testers.git"
+    "url": "git+https://github.com/rogeriocdias/wa-lib.git"
   },
   "keywords": [
     "whatsapp",

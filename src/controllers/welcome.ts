@@ -24,23 +24,3 @@ const { version } = require('../../package.json');
 // Global
 let welcomeShown = false;
 let updatesChecked = false;
-
-/**
- * Logs a boxen of instructions to update
- * @param current
- * @param latest
- */
-function logUpdateAvailable(current: string, latest: string) {
-  // prettier-ignore
-  const newVersionLog =
-      `There is a new version of ${chalk.bold(`Wppconnect`)} ${chalk.gray(current)} ➜  ${chalk.bold.green(latest)}\n` +
-      `Update your package by running:\n\n` +
-      `${chalk.bold('\>')} ${chalk.blueBright('npm update @wppconnect-team/wppconnect')}`;
-
-  logger.info(boxen(newVersionLog, { padding: 1 }));
-  logger.info(
-    `For more info visit: ${chalk.underline(
-      'https://github.com/wppconnect-team/wppconnect/blob/master/Update.md'
-    )}\n`
-  );
-}

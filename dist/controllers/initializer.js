@@ -93,7 +93,6 @@ exports.create = void 0;
 var whatsapp_1 = require("../api/whatsapp");
 var create_config_1 = require("../config/create-config");
 var browser_1 = require("./browser");
-var welcome_1 = require("./welcome");
 var logger_1 = require("../utils/logger");
 var path = __importStar(require("path"));
 var fs = __importStar(require("fs"));
@@ -150,23 +149,14 @@ function create(sessionOrOption, catchQR, statusFind, onLoadingScreen, options, 
                     if (usingDeprecatedCreate) {
                         logger.warn('You are using deprecated create method, please use create({options}) See: https://wppconnect.io/wppconnect/pages/Getting%20Started/creating-client.html#passing-options-on-create');
                     }
-                    if (!mergedOptions.disableWelcome) {
-                        (0, welcome_1.welcomeScreen)();
-                    }
-                    if (!mergedOptions.updatesLog) return [3 /*break*/, 2];
-                    return [4 /*yield*/, (0, welcome_1.checkUpdates)()];
-                case 1:
-                    _b.sent();
-                    _b.label = 2;
-                case 2:
                     browser = mergedOptions.browser;
                     page = mergedOptions.page;
-                    if (!(!browser && page)) return [3 /*break*/, 3];
+                    if (!(!browser && page)) return [3 /*break*/, 1];
                     // Get browser from page
                     browser = page.browser();
-                    return [3 /*break*/, 5];
-                case 3:
-                    if (!(!browser && !page)) return [3 /*break*/, 5];
+                    return [3 /*break*/, 3];
+                case 1:
+                    if (!(!browser && !page)) return [3 /*break*/, 3];
                     if (!mergedOptions.browserWS &&
                         !((_a = mergedOptions.puppeteerOptions) === null || _a === void 0 ? void 0 : _a.userDataDir)) {
                         mergedOptions.puppeteerOptions.userDataDir = path.resolve(process.cwd(), path.join(mergedOptions.folderNameToken, (0, sanitize_filename_1.default)(session)));
@@ -203,7 +193,7 @@ function create(sessionOrOption, catchQR, statusFind, onLoadingScreen, options, 
                             });
                             throw e;
                         })];
-                case 4:
+                case 2:
                     browser = _b.sent();
                     logger.http('checking headless...', {
                         session: session,
@@ -221,8 +211,8 @@ function create(sessionOrOption, catchQR, statusFind, onLoadingScreen, options, 
                             type: 'browser',
                         });
                     }
-                    _b.label = 5;
-                case 5:
+                    _b.label = 3;
+                case 3:
                     if (!mergedOptions.browserWS && browser['_process']) {
                         browser['_process'].once('close', function () {
                             browser['isClose'] = true;
@@ -255,24 +245,24 @@ function create(sessionOrOption, catchQR, statusFind, onLoadingScreen, options, 
                             statusFind && statusFind('browserClose', session);
                         }
                     });
-                    if (!!page) return [3 /*break*/, 7];
+                    if (!!page) return [3 /*break*/, 5];
                     return [4 /*yield*/, (0, browser_1.getOrCreatePage)(browser)];
-                case 6:
+                case 4:
                     // Initialize a page
                     page = _b.sent();
-                    _b.label = 7;
-                case 7:
-                    if (!page) return [3 /*break*/, 11];
+                    _b.label = 5;
+                case 5:
+                    if (!page) return [3 /*break*/, 9];
                     client_1 = new whatsapp_1.Whatsapp(page, session, mergedOptions);
                     client_1.catchQR = catchQR;
                     client_1.statusFind = statusFind;
                     client_1.onLoadingScreen = onLoadingScreen;
                     return [4 /*yield*/, client_1.start()];
-                case 8:
+                case 6:
                     _b.sent();
-                    if (!mergedOptions.waitForLogin) return [3 /*break*/, 10];
+                    if (!mergedOptions.waitForLogin) return [3 /*break*/, 8];
                     return [4 /*yield*/, client_1.waitForLogin()];
-                case 9:
+                case 7:
                     isLogged = _b.sent();
                     if (!isLogged) {
                         throw 'Not Logged';
@@ -305,9 +295,9 @@ function create(sessionOrOption, catchQR, statusFind, onLoadingScreen, options, 
                             }
                         });
                     }); });
-                    _b.label = 10;
-                case 10: return [2 /*return*/, client_1];
-                case 11: return [2 /*return*/];
+                    _b.label = 8;
+                case 8: return [2 /*return*/, client_1];
+                case 9: return [2 /*return*/];
             }
         });
     });
